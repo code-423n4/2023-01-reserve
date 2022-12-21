@@ -56,8 +56,8 @@ Under "SPONSORS ADD INFO HERE" heading below, include the following:
 - Join [C4 Discord](https://discord.gg/code4rena) to register
 - Submit findings [using the C4 form](https://code4rena.com/contests/2023-01-reserve-contest/submit)
 - [Read our guidelines for more details](https://docs.code4rena.com/roles/wardens)
-- Starts January 04, 2022 20:00 UTC
-- Ends January 18, 2022 20:00 UTC
+- Starts January 06, 2022 20:00 UTC
+- Ends January 20, 2022 20:00 UTC
 
 ## C4udit / Publicly Known Issues
 
