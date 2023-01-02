@@ -19,7 +19,17 @@ The C4audit output for the contest can be found [here](add link to report) withi
 
 _Note for C4 wardens: Anything included in the C4udit output is considered a publicly known issue and is ineligible for awards._
 
-[ ⭐️ SPONSORS ADD INFO HERE ]
+Items listed below aren't necessarily issues but rather just describe some protocol specific behavior that we are aware of.
+
+- StRSR is slightly reflexive, and in case of large percentage of collateral defaults, it may not be able to cover as much as expected.
+- The governance has the ability to freeze, and with long freezing enabled (default) it is possible for governance to soft-lock the backing for the duration of the freezing period by preventing the RToken holders from redeeming. The idea is to turn off freezing capabilities couple months into RToken existence.
+- The individual asset plugins, and hance the protocol itself, relies heavily on Oracles for accurate price determination.
+
+Additionally, anything mentioned in the previous audits is considered known issues:
+
+- [Trail of Bits - August 11th, 2022](/audits/Trail%20of%20Bits%20-%20Aug%2011%202022.pdf)
+- [Solidified - October 16th, 2022](/audits/Solidified%20-%20Oct%2016%202022.pdf)
+- [Halborn Security - November 15th, 2022](/audits/Halborn%20Security%20-%20Nov%2015%202022.pdf)
 
 # Overview
 
@@ -79,6 +89,14 @@ The following directories and implementations are considered out-of-scope for th
 # Additional Context
 
 We do have some very specific Recollateralization Logic described in the `docs/recollateralization.md` file, you can also find other documentation in the same folder. There's additional information available in the primary `README.md` file as well. Here's a [video walkthrough](https://www.youtube.com/watch?v=341MhkOWsJE) of the code which provides additional context around specific files, structure and logic.
+
+Additionally, we also recommend going through the following documents in order to understand the protocol better.
+
+- `docs/system-design.md`
+- `docs/collateral.md`
+- `docs/Token Flow.png`
+- `docs/solidity-style.md`
+  - Especially the section on `Fixed.sol` which describes our `uint192` based fixed-point decimal value.
 
 ## Scoping Details
 
