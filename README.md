@@ -1,12 +1,12 @@
 # Reserve Protocol contest details
 
-- Total Prize Pool: $230,500 USDC
+- Total Prize Pool: $210,500 USDC
   - HM awards: $127,500 USDC
   - QA report awards: $15,000 USDC
   - Gas report awards: $7,500 USDC
   - Judge + presort awards: $30,000
   - Scout awards: $500 USDC
-  - Mitigation review contest: $50,000 USDC
+  - Mitigation review contest: $30,000 USDC
 - Join [C4 Discord](https://discord.gg/code4rena) to register
 - Submit findings [using the C4 form](https://code4rena.com/contests/2023-01-reserve-contest/submit)
 - [Read our guidelines for more details](https://docs.code4rena.com/roles/wardens)
