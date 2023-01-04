@@ -27,10 +27,10 @@ Items listed below aren't necessarily issues but rather just describe some proto
 
 Additionally, anything mentioned in the previous audits is considered known issues:
 
-- [Trail of Bits - August 11th, 2022](/audits/Trail%20of%20Bits%20-%20Aug%2011%202022.pdf)
-- [Ackee - October 7th, 2022](/audits/Ackee%20-%20Oct%2007%202022.pdf)
-- [Solidified - October 16th, 2022](/audits/Solidified%20-%20Oct%2016%202022.pdf)
-- [Halborn Security - November 15th, 2022](/audits/Halborn%20Security%20-%20Nov%2015%202022.pdf)
+- [Trail of Bits - August 11th, 2022](https://github.com/code-423n4/2023-01-reserve/blob/main/audits/Trail%20of%20Bits%20-%20Aug%2011%202022.pdf)
+- [Ackee - October 7th, 2022](https://github.com/code-423n4/2023-01-reserve/blob/main/audits/Ackee%20-%20Oct%2007%202022.pdf)
+- [Solidified - October 16th, 2022](https://github.com/code-423n4/2023-01-reserve/blob/main/audits/Solidified%20-%20Oct%2016%202022.pdf)
+- [Halborn Security - November 15th, 2022](https://github.com/code-423n4/2023-01-reserve/blob/main/audits/Halborn%20Security%20-%20Nov%2015%202022.pdf)
 
 # Overview
 
