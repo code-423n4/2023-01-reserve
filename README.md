@@ -112,7 +112,7 @@ Additionally, we also recommend going through the following documents in order t
 - What is the overall line coverage percentage provided by your tests?:  95
 - Is there a need to understand a separate part of the codebase / get context in order to audit this part of the protocol?:  false
 - Please describe required context:
-- Does it use an oracle?:  true; Specific Asset and Collalteral plugins use oracles heavily; the main body of the protocol treats that as an implementation detail. Built-in assets use Chainlink oracles; other assets (if they’re canonical by the time this review is happening) are likely to use other oracles.
+- Does it use an oracle?:  true; Specific Asset and Collateral plugins use oracles heavily; the main body of the protocol treats that as an implementation detail. Built-in assets use Chainlink oracles; other assets (if they’re canonical by the time this review is happening) are likely to use other oracles.
 - Does the token conform to the ERC20 standard?:  The present tokens are ERC20s, yes.
 - Are there any novel or unique curve logic or mathematical models?: Not precisely what you’re asking, but it’ll be important to understand: 1) Basically everything in https://github.com/reserve-protocol/protocol/blob/master/docs/solidity-style.md, some of which is unique to us 2) Our system of Collateral units, described here: https://github.com/reserve-protocol/protocol/blob/master/docs/collateral.md#accounting-units-and-exchange-rates
 - Does it use a timelock function?:  No
@@ -124,10 +124,35 @@ Additionally, we also recommend going through the following documents in order t
 - Does it use a side-chain?: false
 ```
 
-# Tests
+# Initializing the repo
 
-Detailed steps to run tests against the protocol are available here in the `docs/dev-env.md` document. If you plan on directly cloning this repo, we'd recommend cloning with the following command and running all `yarn` commands in the `protocol` directory.
+Clone the repo with the following command:
 
-```
+```bash
 git clone --recurse-submodules https://github.com/code-423n4/2023-01-reserve.git
 ```
+
+If you've already cloned the repo but without the `--recurse-submodules`, you can run the [following](https://git-scm.com/book/en/v2/Git-Tools-Submodules#_cloning_submodules) in the repo's directory:
+```bash
+git submodule update --init
+```
+
+## Tests
+
+Detailed steps to run tests against the protocol are available here in the [docs/dev-env.md](https://github.com/reserve-protocol/protocol/blob/d224c14c398d2727d39d133aa7511e1e6b161833/docs/dev-env.md) document:
+
+- Compile: `yarn compile`
+- Enable the gas reporter: `export REPORT_GAS=1`
+- There are many available test sets. A few of the most useful are:
+  - Run only fast tests: `yarn test:fast`
+  - Run P0 tests: `yarn test:p0`
+  - Run P1 tests: `yarn test:p1`
+  - Run plugin tests: `yarn test:plugins`
+  - Run integration tests: `yarn test:integration`
+  - Run tests and report test coverage: `yarn test:coverage`
+
+Note: Gas reporting will be skipped for several of the above instructions because the plugin `hardhat-gas-reporter` does not support the `--parallel` flag. Please take the instructions in [package.json](https://github.com/reserve-protocol/protocol/blob/d224c14c398d2727d39d133aa7511e1e6b161833/package.json#L12-L31) and run them without `--parallel` (as an example, after having run `export REPORT_GAS=1`: `npx hardhat test test/{libraries,plugins}/*.test.ts`)
+
+## Slither
+
+`slither .` won't work, you need to run `yarn slither`
