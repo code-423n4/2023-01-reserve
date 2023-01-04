@@ -28,6 +28,7 @@ Items listed below aren't necessarily issues but rather just describe some proto
 Additionally, anything mentioned in the previous audits is considered known issues:
 
 - [Trail of Bits - August 11th, 2022](/audits/Trail%20of%20Bits%20-%20Aug%2011%202022.pdf)
+- [Ackee - October 7th, 2022](/audits/Ackee%20-%20Oct%2007%202022.pdf)
 - [Solidified - October 16th, 2022](/audits/Solidified%20-%20Oct%2016%202022.pdf)
 - [Halborn Security - November 15th, 2022](/audits/Halborn%20Security%20-%20Nov%2015%202022.pdf)
 
@@ -64,18 +65,18 @@ For the P1 Implementation, here's a brief description of each file.
 
 | Contract           | SLOC | Purpose                                                   | Libraries used    |
 | ------------------ | ---- | --------------------------------------------------------- | ----------------- |
-| AssetRegistry.sol  | TODO | Asset Registry                                            | `@openzeppelin/*` |
-| BackingManager.sol | TODO | Backing Manager                                           | `@openzeppelin/*` |
-| BasketHandler.sol  | TODO | Basket Handler                                            | `@openzeppelin/*` |
-| Broker.sol         | TODO | Broker                                                    | `@openzeppelin/*` |
-| Deployer.sol       | TODO | Deployer                                                  | `@openzeppelin/*` |
-| Distributor.sol    | TODO | Distributor                                               | `@openzeppelin/*` |
-| Furnace.sol        | TODO | Furnace                                                   | `@openzeppelin/*` |
-| Main.sol           | TODO | Main                                                      | `@openzeppelin/*` |
-| RevenueTrader.sol  | TODO | Revenue Trader (used for both RSR Trader & RToken Trader) | `@openzeppelin/*` |
-| RToken.sol         | TODO | RToken                                                    | `@openzeppelin/*` |
-| StRSR.sol          | TODO | StRSR                                                     | `@openzeppelin/*` |
-| StRSRVotes.sol     | TODO | StRSRVotes                                                | `@openzeppelin/*` |
+| AssetRegistry.sol  | 93   | Asset Registry                                            | `@openzeppelin/*` |
+| BackingManager.sol | 138  | Backing Manager                                           | `@openzeppelin/*` |
+| BasketHandler.sol  | 351  | Basket Handler                                            | `@openzeppelin/*` |
+| Broker.sol         | 87   | Broker                                                    | `@openzeppelin/*` |
+| Deployer.sol       | 177  | Deployer                                                  | `@openzeppelin/*` |
+| Distributor.sol    | 110  | Distributor                                               | `@openzeppelin/*` |
+| Furnace.sol        | 46   | Furnace                                                   | `@openzeppelin/*` |
+| Main.sol           | 42   | Main                                                      | `@openzeppelin/*` |
+| RevenueTrader.sol  | 60   | Revenue Trader (used for both RSR Trader & RToken Trader) | `@openzeppelin/*` |
+| RToken.sol         | 387  | RToken                                                    | `@openzeppelin/*` |
+| StRSR.sol          | 398  | StRSR                                                     | `@openzeppelin/*` |
+| StRSRVotes.sol     | 162  | StRSRVotes                                                | `@openzeppelin/*` |
 
 ## Out of scope
 
