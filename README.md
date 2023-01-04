@@ -1,58 +1,12 @@
-# ✨ So you want to sponsor a contest
+# Reserve Protocol contest details
 
-This `README.md` contains a set of checklists for our contest collaboration.
-
-Your contest will use two repos: 
-- **a _contest_ repo** (this one), which is used for scoping your contest and for providing information to contestants (wardens)
-- **a _findings_ repo**, where issues are submitted (shared with you after the contest) 
-
-Ultimately, when we launch the contest, this contest repo will be made public and will contain the smart contracts to be reviewed and all the information needed for contest participants. The findings repo will be made public after the contest report is published and your team has mitigated the identified issues.
-
-Some of the checklists in this doc are for **C4 (🐺)** and some of them are for **you as the contest sponsor (⭐️)**.
-
----
-
-# Repo setup
-
-## ⭐️ Sponsor: Add code to this repo
-
-- [ ] Create a PR to this repo with the below changes:
-- [ ] Provide a self-contained repository with working commands that will build (at least) all in-scope contracts, and commands that will run tests producing gas reports for the relevant contracts.
-- [ ] Make sure your code is thoroughly commented using the [NatSpec format](https://docs.soliditylang.org/en/v0.5.10/natspec-format.html#natspec-format).
-- [ ] Please have final versions of contracts and documentation added/updated in this repo **no less than 24 hours prior to contest start time.**
-- [ ] Be prepared for a 🚨code freeze🚨 for the duration of the contest — important because it establishes a level playing field. We want to ensure everyone's looking at the same code, no matter when they look during the contest. (Note: this includes your own repo, since a PR can leak alpha to our wardens!)
-
-
----
-
-## ⭐️ Sponsor: Edit this README
-
-Under "SPONSORS ADD INFO HERE" heading below, include the following:
-
-- [ ] Modify the bottom of this `README.md` file to describe how your code is supposed to work with links to any relevent documentation and any other criteria/details that the C4 Wardens should keep in mind when reviewing. ([Here's a well-constructed example.](https://github.com/code-423n4/2022-08-foundation#readme))
-  - [ ] When linking, please provide all links as full absolute links versus relative links
-  - [ ] All information should be provided in markdown format (HTML does not render on Code4rena.com)
-- [ ] Under the "Scope" heading, provide the name of each contract and:
-  - [ ] source lines of code (excluding blank lines and comments) in each
-  - [ ] external contracts called in each
-  - [ ] libraries used in each
-- [ ] Describe any novel or unique curve logic or mathematical models implemented in the contracts
-- [ ] Does the token conform to the ERC-20 standard? In what specific ways does it differ?
-- [ ] Describe anything else that adds any special logic that makes your approach unique
-- [ ] Identify any areas of specific concern in reviewing the code
-- [ ] Optional / nice to have: pre-record a high-level overview of your protocol (not just specific smart contract functions). This saves wardens a lot of time wading through documentation.
-- [ ] Delete this checklist and all text above the line below when you're ready.
-
----
-
-# Reserve contest details
 - Total Prize Pool: $230,500 USDC
-  - HM awards: $127,500 USDC 
-  - QA report awards: $15,000 USDC 
-  - Gas report awards: $7,500 USDC 
-  - Judge + presort awards: $30,000 
-  - Scout awards: $500 USDC 
-  - Mitigation review contest: $50,000 USDC 
+  - HM awards: $127,500 USDC
+  - QA report awards: $15,000 USDC
+  - Gas report awards: $7,500 USDC
+  - Judge + presort awards: $30,000
+  - Scout awards: $500 USDC
+  - Mitigation review contest: $50,000 USDC
 - Join [C4 Discord](https://discord.gg/code4rena) to register
 - Submit findings [using the C4 form](https://code4rena.com/contests/2023-01-reserve-contest/submit)
 - [Read our guidelines for more details](https://docs.code4rena.com/roles/wardens)
@@ -63,44 +17,101 @@ Under "SPONSORS ADD INFO HERE" heading below, include the following:
 
 The C4audit output for the contest can be found [here](add link to report) within an hour of contest opening.
 
-*Note for C4 wardens: Anything included in the C4udit output is considered a publicly known issue and is ineligible for awards.*
+_Note for C4 wardens: Anything included in the C4udit output is considered a publicly known issue and is ineligible for awards._
 
-[ ⭐️ SPONSORS ADD INFO HERE ]
+Items listed below aren't necessarily issues but rather just describe some protocol specific behavior that we are aware of.
+
+- StRSR is slightly reflexive, and in case of large percentage of collateral defaults, it may not be able to cover as much as expected.
+- The governance has the ability to freeze, and with long freezing enabled (default) it is possible for governance to soft-lock the backing for the duration of the freezing period by preventing the RToken holders from redeeming. The idea is to turn off freezing capabilities couple months into RToken existence.
+- The individual asset plugins, and hance the protocol itself, relies heavily on Oracles for accurate price determination.
+
+Additionally, anything mentioned in the previous audits is considered known issues:
+
+- [Trail of Bits - August 11th, 2022](/audits/Trail%20of%20Bits%20-%20Aug%2011%202022.pdf)
+- [Ackee - October 7th, 2022](/audits/Ackee%20-%20Oct%2007%202022.pdf)
+- [Solidified - October 16th, 2022](/audits/Solidified%20-%20Oct%2016%202022.pdf)
+- [Halborn Security - November 15th, 2022](/audits/Halborn%20Security%20-%20Nov%2015%202022.pdf)
 
 # Overview
 
-*Please provide some context about the code being audited, and identify any areas of specific concern in reviewing the code. (This is a good place to link to your docs, if you have them.)*
+The Reserve Protocol allows anyone to create stablecoins backed by baskets of ERC20 tokens on Ethereum. Stable asset backed currencies launched on the Reserve protocol are called “RTokens”.
+
+Once an RToken configuration has been deployed, RTokens can be minted by depositing the entire basket of collateral backing tokens, and redeemed for the entire basket as well. Thus, an RToken will tend to trade at the market value of the entire basket that backs it, as any lower or higher price could be arbitraged.
+
+RTokens can be overcollateralized, which means that if any of their collateral tokens default, there's a pool of value available to make up for the loss. RToken overcollateralization is provided by Reserve Rights (RSR) holders, who may choose to stake their RSR on any RToken. Staked RSR can be seized in the case of a collateral default, in a process that is entirely mechanistic based on on-chain price-feeds, and does not depend on any governance votes or human choices.
+
+RTokens can generate revenue, and this revenue is the incentive for RSR holders to stake. Revenue can come from yield from lending collateral tokens on-chain or revenue shares with collateral token issuers. Governance can direct any portion of revenue to RSR stakers, to incentivize RSR holders to stake and provide overcollateralization. If an RToken generates no revenue, or if none of it is directed to RSR stakers, it probably won't have any RSR staked on it, and thus won't be protected by overcollateralization.
+
+[Introduction Video](https://www.youtube.com/watch?v=JOy0wCVhnwM)
+
+The `protocol` folder in this repo is linked to the primary Reserve Protocol public repo at commit hash `d224c14c398d2727d39d133aa7511e1e6b161833`.
 
 # Scope
 
-*List all files in scope in the table below -- and feel free to add notes here to emphasize areas of focus.*
+The base directory is assumed to be `protocol` relative to the root of this repo.
 
-| Contract | SLOC | Purpose | Libraries used |  
-| ----------- | ----------- | ----------- | ----------- |
-| contracts/folder/sample.sol | 123 | This contract does XYZ | [`@openzeppelin/*`](https://openzeppelin.com/contracts/) |
+The following directories and implementations are considered in-scope for this audit.
+
+| Contract                  | Purpose                           |
+| ------------------------- | --------------------------------- |
+| contracts/p1/\*\*         | P1 Implementation of the Protocol |
+| contracts/libraries/\*\*  | Libraries used in the Protocol    |
+| contracts/interfaces/\*\* | Interfaces used in the Protocol   |
+| contracts/mixins/\*\*     | Mixins used in the Protocol       |
+| contracts/p1/mixins/\*\*  | Mixins used in the Protocol       |
+| contracts/plugins/\*\*    | Plugins used in the Protocol      |
+
+For the P1 Implementation, here's a brief description of each file.
+
+| Contract           | SLOC | Purpose                                                   | Libraries used    |
+| ------------------ | ---- | --------------------------------------------------------- | ----------------- |
+| AssetRegistry.sol  | 93   | Asset Registry                                            | `@openzeppelin/*` |
+| BackingManager.sol | 138  | Backing Manager                                           | `@openzeppelin/*` |
+| BasketHandler.sol  | 351  | Basket Handler                                            | `@openzeppelin/*` |
+| Broker.sol         | 87   | Broker                                                    | `@openzeppelin/*` |
+| Deployer.sol       | 177  | Deployer                                                  | `@openzeppelin/*` |
+| Distributor.sol    | 110  | Distributor                                               | `@openzeppelin/*` |
+| Furnace.sol        | 46   | Furnace                                                   | `@openzeppelin/*` |
+| Main.sol           | 42   | Main                                                      | `@openzeppelin/*` |
+| RevenueTrader.sol  | 60   | Revenue Trader (used for both RSR Trader & RToken Trader) | `@openzeppelin/*` |
+| RToken.sol         | 387  | RToken                                                    | `@openzeppelin/*` |
+| StRSR.sol          | 398  | StRSR                                                     | `@openzeppelin/*` |
+| StRSRVotes.sol     | 162  | StRSRVotes                                                | `@openzeppelin/*` |
 
 ## Out of scope
 
-*List any files/contracts that are out of scope for this audit.*
+The following directories and implementations are considered out-of-scope for this audit.
+
+| Contract              | Purpose                              |
+| --------------------- | ------------------------------------ |
+| contracts/facade/\*\* | Periphery Contracts for the Protocol |
+| contracts/p0/\*\*     | P0 Implementation of the Protocol    |
 
 # Additional Context
 
-*Describe any novel or unique curve logic or mathematical models implemented in the contracts*
+We do have some very specific Recollateralization Logic described in the `docs/recollateralization.md` file, you can also find other documentation in the same folder. There's additional information available in the primary `README.md` file as well. Here's a [video walkthrough](https://www.youtube.com/watch?v=341MhkOWsJE) of the code which provides additional context around specific files, structure and logic.
 
-*Sponsor, please confirm/edit the information below.*
+Additionally, we also recommend going through the following documents in order to understand the protocol better.
 
-## Scoping Details 
+- `docs/system-design.md`
+- `docs/collateral.md`
+- `docs/Token Flow.png`
+- `docs/solidity-style.md`
+  - Especially the section on `Fixed.sol` which describes our `uint192` based fixed-point decimal value.
+
+## Scoping Details
+
 ```
 - If you have a public code repo, please share it here:  https://github.com/reserve-protocol/protocol
 - How many contracts are in scope?:   77
 - Total SLoC for these contracts?:  5460
-- How many external imports are there?: 35  
+- How many external imports are there?: 35
 - How many separate interfaces and struct definitions are there for the contracts within scope?:  27 structs, 42 interfaces
 - Does most of your code generally use composition or inheritance?: The main structure of the protocol is divided up with contract composition, though inheritance is used basically everywhere, in moderation.
-- How many external calls?:  12 
+- How many external calls?:  12
 - What is the overall line coverage percentage provided by your tests?:  95
-- Is there a need to understand a separate part of the codebase / get context in order to audit this part of the protocol?:  false 
-- Please describe required context:   
+- Is there a need to understand a separate part of the codebase / get context in order to audit this part of the protocol?:  false
+- Please describe required context:
 - Does it use an oracle?:  true; Specific Asset and Collalteral plugins use oracles heavily; the main body of the protocol treats that as an implementation detail. Built-in assets use Chainlink oracles; other assets (if they’re canonical by the time this review is happening) are likely to use other oracles.
 - Does the token conform to the ERC20 standard?:  The present tokens are ERC20s, yes.
 - Are there any novel or unique curve logic or mathematical models?: Not precisely what you’re asking, but it’ll be important to understand: 1) Basically everything in https://github.com/reserve-protocol/protocol/blob/master/docs/solidity-style.md, some of which is unique to us 2) Our system of Collateral units, described here: https://github.com/reserve-protocol/protocol/blob/master/docs/collateral.md#accounting-units-and-exchange-rates
@@ -110,11 +121,13 @@ The C4audit output for the contest can be found [here](add link to report) withi
 - Is it a fork of a popular project?:   false
 - Does it use rollups?:   false
 - Is it multi-chain?:  false
-- Does it use a side-chain?: false 
+- Does it use a side-chain?: false
 ```
 
 # Tests
 
-*Provide every step required to build the project from a fresh git clone, as well as steps to run the tests with a gas report.* 
+Detailed steps to run tests against the protocol are available here in the `docs/dev-env.md` document. If you plan on directly cloning this repo, we'd recommend cloning with the following command and running all `yarn` commands in the `protocol` directory.
 
-*Note: Many wardens run Slither as a first pass for testing.  Please document any known errors with no workaround.* 
+```
+git clone --recurse-submodules https://github.com/code-423n4/2023-01-reserve.git
+```
