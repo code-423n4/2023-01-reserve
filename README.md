@@ -142,7 +142,6 @@ git submodule update --init
 Detailed steps to run tests against the protocol are available here in the [docs/dev-env.md](https://github.com/reserve-protocol/protocol/blob/d224c14c398d2727d39d133aa7511e1e6b161833/docs/dev-env.md) document:
 
 - Compile: `yarn compile`
-- Enable the gas reporter: `export REPORT_GAS=1`
 - There are many available test sets. A few of the most useful are:
   - Run only fast tests: `yarn test:fast`
   - Run P0 tests: `yarn test:p0`
@@ -151,7 +150,22 @@ Detailed steps to run tests against the protocol are available here in the [docs
   - Run integration tests: `yarn test:integration`
   - Run tests and report test coverage: `yarn test:coverage`
 
-Note: Gas reporting will be skipped for several of the above instructions because the plugin `hardhat-gas-reporter` does not support the `--parallel` flag. Please take the instructions in [package.json](https://github.com/reserve-protocol/protocol/blob/d224c14c398d2727d39d133aa7511e1e6b161833/package.json#L12-L31) and run them without `--parallel` (as an example, after having run `export REPORT_GAS=1`: `npx hardhat test test/{libraries,plugins}/*.test.ts`)
+## Gas Reporting
+
+To take gas measurements you can use the command `yarn test:gas`
+
+This performs the following actions:
+- Sets the `REPORT_GAS=1` env variable
+- Enables `hardhat-gas-reporter`
+- Runs the tests without the `--parallel` flag
+- Runs specific sections in our test files identified by `describeGas`, which take gas measurements and compares them to a previous snapshot.
+
+It is important to remark that if you make changes to the contracts, and run the tests again with `REPORT_GAS=1`, the tests will fail if the new gas cost differs from the one saved in the snapshot. Snapshots have to be recreated in each run by simply deleting the `__snapshots__` folders located in `\test`, `\test\plugins`. and `test\scenarios`, and running the tests again.
+
+To run gas measurements for a specific test file (for example `Plugins`), you need to run:
+`PROTO_IMPL=1 REPORT_GAS=1 npx hardhat test test/plugins/*.test.ts`
+
+NOTE: If our process of using `snapshots` is too cumbersome and adds a lot of friction to the way you do gas measurements, you can simply remove all sections in the tests identified as `describeGas`, and use your own gas measurements and tools. At then end we can restore those and run the tests once just to save the updated final snapshot value. But we dont enforce any particular process for gas analysis so feel free to use what's best for you.
 
 ## Slither
 
