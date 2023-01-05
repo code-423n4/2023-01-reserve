@@ -169,7 +169,7 @@ It is important to remark that if you make changes to the contracts, and run the
 To run gas measurements for a specific test file (for example `Plugins`), you need to run:
 `PROTO_IMPL=1 REPORT_GAS=1 npx hardhat test test/plugins/*.test.ts`.
 
-NOTE: If our process of using `snapshots` is too cumbersome and adds a lot of friction to the way you do gas measurements, you can simply remove all sections in the tests identified as `describeGas`, and use your own gas measurements and tools. At then end we can restore those and run the tests once just to save the updated final snapshot value. But we dont enforce any particular process for gas analysis so feel free to use what's best for you.
+NOTE: If our process of using `snapshots` is too cumbersome and adds a lot of friction to the way you do gas measurements, you can simply remove all sections in the tests identified as `describeGas`, and use your own gas measurements and tools. At then end we can restore those and run the tests once just to save the updated final snapshot value. But we don't enforce any particular process for gas analysis so feel free to use what's best for you.
 
 ## Slither
 
