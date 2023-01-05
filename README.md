@@ -44,7 +44,7 @@ RTokens can generate revenue, and this revenue is the incentive for RSR holders 
 
 [Introduction Video](https://www.youtube.com/watch?v=JOy0wCVhnwM)
 
-The `protocol` folder in this repo is linked to the primary Reserve Protocol public repo at commit hash `d224c14c398d2727d39d133aa7511e1e6b161833`.
+The `protocol` folder in this repo is linked to the primary Reserve Protocol public repo at commit hash `df7ecadc2bae74244ace5e8b39e94bc992903158`.
 
 # Scope
 
@@ -133,13 +133,14 @@ git clone --recurse-submodules https://github.com/code-423n4/2023-01-reserve.git
 ```
 
 If you've already cloned the repo but without the `--recurse-submodules`, you can run the [following](https://git-scm.com/book/en/v2/Git-Tools-Submodules#_cloning_submodules) in the repo's directory:
+
 ```bash
 git submodule update --init
 ```
 
 ## Tests
 
-Detailed steps to run tests against the protocol are available here in the [docs/dev-env.md](https://github.com/reserve-protocol/protocol/blob/d224c14c398d2727d39d133aa7511e1e6b161833/docs/dev-env.md) document:
+Detailed steps to run tests against the protocol are available here in the [docs/dev-env.md](https://github.com/reserve-protocol/protocol/blob/df7ecadc2bae74244ace5e8b39e94bc992903158/docs/dev-env.md) document:
 
 - Compile: `yarn compile`
 - There are many available test sets. A few of the most useful are:
@@ -152,9 +153,12 @@ Detailed steps to run tests against the protocol are available here in the [docs
 
 ## Gas Reporting
 
-To take gas measurements you can use the command `yarn test:gas`
+To take gas measurements you can use the command `yarn test:gas` which runs both the core protocol and integration tests in series.
+
+To run tests with gas reporting for the core protocol, you can use `yarn test:gas:protocol` which runs offline without a fork. In order to run integration tests with gas reporting, you can use `yarn test:gas:integration` which requires a FORK to be set up.
 
 This performs the following actions:
+
 - Sets the `REPORT_GAS=1` env variable
 - Enables `hardhat-gas-reporter`
 - Runs the tests without the `--parallel` flag
@@ -163,7 +167,7 @@ This performs the following actions:
 It is important to remark that if you make changes to the contracts, and run the tests again with `REPORT_GAS=1`, the tests will fail if the new gas cost differs from the one saved in the snapshot. Snapshots have to be recreated in each run by simply deleting the `__snapshots__` folders located in `\test`, `\test\plugins`. and `test\scenarios`, and running the tests again.
 
 To run gas measurements for a specific test file (for example `Plugins`), you need to run:
-`PROTO_IMPL=1 REPORT_GAS=1 npx hardhat test test/plugins/*.test.ts`
+`PROTO_IMPL=1 REPORT_GAS=1 npx hardhat test test/plugins/*.test.ts`.
 
 NOTE: If our process of using `snapshots` is too cumbersome and adds a lot of friction to the way you do gas measurements, you can simply remove all sections in the tests identified as `describeGas`, and use your own gas measurements and tools. At then end we can restore those and run the tests once just to save the updated final snapshot value. But we dont enforce any particular process for gas analysis so feel free to use what's best for you.
 
