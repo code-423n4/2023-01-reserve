@@ -166,10 +166,13 @@ This performs the following actions:
 
 It is important to remark that if you make changes to the contracts, and run the tests again with `REPORT_GAS=1`, the tests will fail if the new gas cost differs from the one saved in the snapshot. Snapshots have to be recreated in each run by simply deleting the `__snapshots__` folders located in `\test`, `\test\plugins`. and `test\scenarios`, and running the tests again.
 
-To run gas measurements for a specific test file (for example `Plugins`), you need to run:
-`PROTO_IMPL=1 REPORT_GAS=1 npx hardhat test test/plugins/*.test.ts`.
+NOTES:
 
-NOTE: If our process of using `snapshots` is too cumbersome and adds a lot of friction to the way you do gas measurements, you can simply remove all sections in the tests identified as `describeGas`, and use your own gas measurements and tools. At then end we can restore those and run the tests once just to save the updated final snapshot value. But we don't enforce any particular process for gas analysis so feel free to use what's best for you.
+* Exception: There are two tests within `test\scenarios\MaxBasketSize.test.ts` that will fail when running the gas commands above for the complete test suite. This occurs because we take snapshots on a file by file basis, and gas costs differ when ran all together. So don't worry about those failures. To run gas measurements for this specific test file you can simply run:
+`PROTO_IMPL=1 REPORT_GAS=1 npx hardhat test test/scenario/MaxBasketSize.test.ts`.
+
+* If our process of using `snapshots` is too cumbersome and adds a lot of friction to the way you do gas measurements, you can simply remove all sections in the tests identified as `describeGas`, and use your own gas measurements and tools. At then end we can restore those and run the tests once just to save the updated final snapshot value. But we don't enforce any particular process for gas analysis so feel free to use what's best for you.
+
 
 ## Slither
 
