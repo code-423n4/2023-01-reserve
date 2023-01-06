@@ -24,6 +24,7 @@ Items listed below aren't necessarily issues but rather just describe some proto
 - StRSR is slightly reflexive, and in case of large percentage of collateral defaults, it may not be able to cover as much as expected.
 - The governance has the ability to freeze, and with long freezing enabled (default) it is possible for governance to soft-lock the backing for the duration of the freezing period by preventing the RToken holders from redeeming. The idea is to turn off freezing capabilities couple months into RToken existence.
 - The individual asset plugins, and hance the protocol itself, relies heavily on Oracles for accurate price determination.
+- [Post Freeze] We found a small difference in the way our P0 and P1 implementations behave in a corner case where an RToken is used as a backing for another. This is fixed in a [PR linked here](https://github.com/reserve-protocol/protocol/pull/568/files).
 
 Additionally, anything mentioned in the previous audits is considered known issues:
 
@@ -168,11 +169,10 @@ It is important to remark that if you make changes to the contracts, and run the
 
 NOTES:
 
-* Exception: There are two tests within `test\scenarios\MaxBasketSize.test.ts` that will fail when running the gas commands above for the complete test suite. This occurs because we take snapshots on a file by file basis, and gas costs differ when ran all together. So don't worry about those failures. To run gas measurements for this specific test file you can simply run:
-`PROTO_IMPL=1 REPORT_GAS=1 npx hardhat test test/scenario/MaxBasketSize.test.ts`.
+- Exception: There are two tests within `test\scenarios\MaxBasketSize.test.ts` that will fail when running the gas commands above for the complete test suite. This occurs because we take snapshots on a file by file basis, and gas costs differ when ran all together. So don't worry about those failures. To run gas measurements for this specific test file you can simply run:
+  `PROTO_IMPL=1 REPORT_GAS=1 npx hardhat test test/scenario/MaxBasketSize.test.ts`.
 
-* If our process of using `snapshots` is too cumbersome and adds a lot of friction to the way you do gas measurements, you can simply remove all sections in the tests identified as `describeGas`, and use your own gas measurements and tools. At then end we can restore those and run the tests once just to save the updated final snapshot value. But we don't enforce any particular process for gas analysis so feel free to use what's best for you.
-
+- If our process of using `snapshots` is too cumbersome and adds a lot of friction to the way you do gas measurements, you can simply remove all sections in the tests identified as `describeGas`, and use your own gas measurements and tools. At then end we can restore those and run the tests once just to save the updated final snapshot value. But we don't enforce any particular process for gas analysis so feel free to use what's best for you.
 
 ## Slither
 
