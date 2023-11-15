@@ -1,0 +1,1191 @@
+==============================================================
+Guild: Code4rena
+Channel: ARCHIVE-Q1-2023 / reserve-jan06
+==============================================================
+
+[01/04/2023 22:30] itsmetechjay (pinned)
+👋 Hello and welcome to the contest channel for the $210,500 USDC **Reserve** contest!
+
+📆 Contest opens Friday, 06 January 2023 20:00 (20:00 UTC) and runs through Friday, 20 January 2023 20:00 (20:00 UTC) (14 days).
+
+Please give a warm welcome to the Reserve team, particularly @Akshat Mittal, @patrick | Reserve, and @tbrent | Reserve, who will be available for questions either here in the channel or via DM.
+
+We'll be posting relevant links, documentation, etc. here, so if you intend to participate in this contest, consider enabling notifications for this channel. 🐺 ⏰
+
+Contest Page: https://code4rena.com/contests/2023-01-reserve-contest
+
+{Embed}
+https://code4rena.com/contests/2023-01-reserve-contest
+Code4rena Reserve contest
+$210,500 USDC
+6 January 2023—20 January 2023
+Code4rena - ARCHIVE-Q1-2023 - reserve-jan06 [1060323395872505886].txt_Files/C4-banner-7C19B.png
+
+{Reactions}
+🎉 (15) 
+
+[01/04/2023 22:30] itsmetechjay
+Pinned a message.
+
+
+[01/05/2023 00:14] yongkiws
+:goose:
+
+
+[01/06/2023 18:21] 14si2o_flint
+:hi5:
+
+
+[01/06/2023 20:01] pmckelvy (pinned)
+hello wardens! we have setup a discord server specifically for this hackathon.  the purpose is to allow each warden to have a private, bilateral channel with the Reserve team in case they want to ask any specific questions (without giving away details of their work to other wardens).  feel free to join if you would like your own channel https://discord.gg/CQdxrN63
+
+{Reactions}
+🙌 (17) 
+
+[01/06/2023 20:01] itsmetechjay
+Pinned a message.
+
+
+[01/06/2023 20:31] thepicodes (pinned)
+**Automated findings: ** https://gist.github.com/Picodes/ab2df52379e4b4993709be1b91aab651
+
+
+[01/06/2023 20:36] kartoonjoy (pinned)
+Wardens, please note that the automated findings output has been posted and added to pinned posts. These are considered publicly known issues and are not eligible for awards.
+
+**Automated findings: **
+https://gist.github.com/Picodes/ab2df52379e4b4993709be1b91aab651
+
+{Embed}
+https://gist.github.com/Picodes/ab2df52379e4b4993709be1b91aab651
+4nalyzer-2023-01-reserve.md
+GitHub Gist: instantly share code, notes, and snippets.
+Code4rena - ARCHIVE-Q1-2023 - reserve-jan06 [1060323395872505886].txt_Files/gist-og-image-17482.png
+
+
+[01/06/2023 20:36] kartoonjoy
+Pinned a message.
+
+
+[01/06/2023 20:36] kartoonjoy
+Pinned a message.
+
+
+[01/06/2023 21:58] tbrent#8288
+Hey all 👋
+
+{Reactions}
+👋🏻 (2) 
+
+[01/07/2023 00:08] ladboy233
+Anyone failed to clone the repo?
+
+
+[01/07/2023 00:08] ladboy233
+git clone --recurse-submodules https://github.com/code-423n4/2023-01-reserve.git
+
+{Embed}
+https://github.com/code-423n4/2023-01-reserve.git
+GitHub - code-423n4/2023-01-reserve
+Contribute to code-423n4/2023-01-reserve development by creating an account on GitHub.
+Code4rena - ARCHIVE-Q1-2023 - reserve-jan06 [1060323395872505886].txt_Files/1a9d626b-222d-444d-9eed-9a1f3c752981-DA9F9
+
+
+[01/07/2023 00:08] ladboy233
+The output is:
+
+
+[01/07/2023 00:08] ladboy233
+```
+Cloning into 'D:/Security/2023-01-reserve/protocol'...
+git@github.com: Permission denied (publickey).     
+fatal: Could not read from remote repository.      
+
+Please make sure you have the correct access rights
+and the repository exists.
+fatal: clone of 'git@github.com:reserve-protocol/protocol.git' into submodule path 'D:/Security/2023-01-reserve/protocol' failed
+Failed to clone 'protocol'. Retry scheduled
+Cloning into 'D:/Security/2023-01-reserve/protocol'...
+git@github.com: Permission denied (publickey).
+fatal: Could not read from remote repository.
+
+Please make sure you have the correct access rights
+and the repository exists.
+fatal: clone of 'git@github.com:reserve-protocol/protocol.git' into submodule path 'D:/Security/2023-01-reserve/protocol' failed
+Failed to clone 'protocol' a second time, aborting
+```
+
+{Reactions}
+👆 (2) 
+
+[01/07/2023 00:13] tbrent#8288
+I'm not sure what's going on here...it seems like it has to do with the combination of SSH + submodules, but I'm not sure why it's erroring out during the read. Is everyone outside the Reserve team getting this error?
+
+
+[01/07/2023 00:15] ladboy233
+The audit shows how much the protocol cares about security. The codebase already went through 4 audits lol
+
+{Reactions}
+🔥 (12) 
+
+[01/07/2023 00:16] ladboy233
+:nice: :chefskiss:
+
+
+[01/07/2023 00:16] epikt1tus
+same issue for me
+
+{Reactions}
+👆 
+
+[01/07/2023 00:47] tbrent#8288 (pinned)
+Ok, looked into this. I believe:
+1. The issue can be fixed for everyone by adjusting the `.gitmodules` file here to use HTTP instead of SSH: https://github.com/code-423n4/2023-01-reserve/blob/main/.gitmodules
+But, I don't have the ability to change the contest repo, so someone else is going to have to step in. I reached out to C4 admins but given it's late on a Friday I don't expect this to be resolved in the very near future. 
+2. In the meantime, I think it should work to just make sure you have an SSH pubkey registered in github and it is up to date. Try this: 
+```
+1. vim ~/.ssh/id_rsa.pub
+2. copy the ssh key
+3. Go to the github settings
+4. Select the option ssh keys
+5. Remove the old ssh keys not used anymore.
+6. Add a new ssh key.
+7. Try running the "git submodule update --recursive"
+```
+
+
+[01/07/2023 05:11] kartoonjoy
+Pinned a message.
+
+
+[01/07/2023 07:16] dravee
+I made the change. I do encourage everyone however to start using SSH 🙂. Thanks to the sponsor for providing a quick guide! Further documentation here => https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent
+
+{Reactions}
+thankyou (3) 
+
+[01/07/2023 10:47] 0xtaylor
+Anyone notice this test fail?
+
+{Attachments}
+Code4rena - ARCHIVE-Q1-2023 - reserve-jan06 [1060323395872505886].txt_Files/image-1EEC7.png
+
+
+[01/07/2023 10:52] 0xtaylor
+Can I even report failing tests?
+
+{Attachments}
+Code4rena - ARCHIVE-Q1-2023 - reserve-jan06 [1060323395872505886].txt_Files/image-DFB41.png
+
+
+[01/07/2023 11:33] dravee
+These are mentioned in the README 🙂. https://github.com/code-423n4/2023-01-reserve#gas-reporting
+> Exception: There are two tests within test\scenarios\MaxBasketSize.test.ts that will fail when running the gas commands above for the complete test suite.
+
+{Embed}
+https://github.com/code-423n4/2023-01-reserve
+GitHub - code-423n4/2023-01-reserve
+Contribute to code-423n4/2023-01-reserve development by creating an account on GitHub.
+Code4rena - ARCHIVE-Q1-2023 - reserve-jan06 [1060323395872505886].txt_Files/1a9d626b-222d-444d-9eed-9a1f3c752981-DA9F9
+
+
+[01/07/2023 13:35] supernovahs
+🔥🔥
+
+
+[01/07/2023 18:21] mattimost
+gm gm
+
+{Reactions}
+🔆 (5) 
+
+[01/08/2023 12:17] kayanski
+Hello everyone, glad to be part of this contest !
+
+{Reactions}
+🎉 (8) 
+
+[01/09/2023 21:10] patrickalphac
+gm frens
+
+{Reactions}
+👍 (9) 👋 (16) 
+
+[01/10/2023 03:00] dewaxindo
+woo, Hi Patrick!
+
+{Reactions}
+👋 
+
+[01/10/2023 07:48] __141345__
+Hi, from the docs website, what is rsv? is it out of scope?
+https://reserve.org/en/protocol/how_rsv_works/
+
+{Embed}
+https://reserve.org/en/protocol/how_rsv_works/
+Reserve  | How RSV works
+
+
+[01/10/2023 21:00] akshatmittal
+RSV is out of scope.
+
+
+[01/11/2023 10:00] 0xwagmi
+wait what 😵
+
+{Reactions}
+👋 (2) 
+
+[01/11/2023 10:59] q5ca
+hello everyone, glad to be here
+
+
+[01/11/2023 12:49] deussolinvictus_
+@tbrent | Reserve @patrick | Reserve may I dm?
+
+
+[01/11/2023 12:52] deussolinvictus_
+I need to confirm an access control bug
+
+
+[01/11/2023 12:53] julianmrodri
+have you joined our private discord?
+
+
+[01/11/2023 12:53] julianmrodri
+Check the pinned messages
+
+
+[01/11/2023 12:53] julianmrodri
+we can open a private channel there
+
+
+[01/11/2023 12:54] deussolinvictus_
+the invite is expired
+
+
+[01/11/2023 12:54] julianmrodri
+Oh.. we will need to wait for Patrick then
+
+
+[01/11/2023 12:55] deussolinvictus_
+that's odd. do you not have perms to create invites?
+
+
+[01/11/2023 12:56] julianmrodri
+Check this https://discord.gg/FSSjt8mU
+
+
+[01/11/2023 12:57] deussolinvictus_
+thanks. i'm in
+
+
+[01/11/2023 12:57] deussolinvictus_
+https://tenor.com/view/hacker-pc-meme-matrix-codes-gif-16730883
+
+{Embed}
+https://tenor.com/view/hacker-pc-meme-matrix-codes-gif-16730883
+Code4rena - ARCHIVE-Q1-2023 - reserve-jan06 [1060323395872505886].txt_Files/hacker-pc-F2A52.png
+
+{Reactions}
+💯 (3) 
+
+[01/12/2023 11:02] bnke0x0
+https://youtu.be/341MhkOWsJE
+
+{Embed}
+Reserve
+https://www.youtube.com/watch?v=341MhkOWsJE
+Reserve Protocol v1.2 smart contract walkthrough
+A technical walkthrough of the smart contracts, aimed at engineers and white-hat hackers who are taking part in the Reserve Protocol Code4rena audit contest in January.
+
+Reserve aims to protect consumers from the effects of high inflation and hopes to one day eradicate it. We are moving forward with two paths:
+
+See the full short film here: http...
+Code4rena - ARCHIVE-Q1-2023 - reserve-jan06 [1060323395872505886].txt_Files/maxresdefault-84AA3.jpg
+
+{Reactions}
+🚀 (3) 
+
+[01/12/2023 13:21] ladboy233
+Are the issue in past four aduit being addressed in the code?
+
+
+[01/12/2023 15:26] julianmrodri
+Audits were done on a slightly different code base so you wont find exactly some of the things. Having said that, all issues in all 4 audits were either fixed, or we decided not to take action (or take a different recommended path).  None of the reported issues in the 4 audits are eligible.
+
+
+[01/12/2023 15:59] patrickalphac
+Yeah, it looks like some of the deployed contracts on mainnet are different than the contracts in scope here. No forking for this competition.
+
+
+[01/12/2023 17:27] patrickalphac
+Should we talk here or in the other channel? Does it matter?
+
+
+[01/12/2023 23:21] julianmrodri
+No contracts have been deployed to Mainnet yet
+
+
+[01/12/2023 23:21] julianmrodri
+Sorry if at some point we gave that impression
+
+
+[01/12/2023 23:22] julianmrodri
+Only previous versions were deployed but you should only focus on the code in the repo, not on deployed contracts
+
+{Reactions}
+👍 
+
+[01/12/2023 23:23] julianmrodri
+If its a general question we can use our Discord main channel.. if not in your private channel with us
+
+{Reactions}
+👍 
+
+[01/12/2023 23:24] julianmrodri
+You can still use forking for interactions with Aave, compound, and the tokens we cover in the integration tests for example but not for our contracts
+
+{Reactions}
+👍 
+
+[01/13/2023 12:02] sathish9098kumar
+what is the problem ? I already installed yarn
+
+{Attachments}
+Code4rena - ARCHIVE-Q1-2023 - reserve-jan06 [1060323395872505886].txt_Files/image-1EA79.png
+
+
+[01/13/2023 13:53] julianmrodri
+I think you should move to the `/protocol/` folder to run all the setup commands
+
+
+[01/13/2023 13:53] sathish9098kumar
+Okay 👍 . I will try
+
+
+[01/13/2023 14:07] ladboy233
+https://reserve.org/en/protocol/how_rsv_works/#how-rsv-works
+
+{Embed}
+https://reserve.org/en/protocol/how_rsv_works/
+Reserve  | How RSV works
+
+
+[01/13/2023 14:08] ladboy233
+Issuance + Redemption
+In both cases, someone who wants to interact with our system does the following:
+
+Approves our system to spend some quantity of their funds, using the standard ERC20 interface function.
+
+Calls the “Issue” or “Redeem” function in our smart contracts.
+
+During Issuance, USDC + BUSD is collected from the user’s wallet and a corresponding quantity of RSV is minted to them.
+
+During Redemption, it happens in reverse: RSV is collected and burnt and the user is compensated with USDC + BUSD.
+
+
+[01/13/2023 14:08] ladboy233
+Does the current issuance and redemption only support USDC + BUSD? maybe more ERC20 in the future?
+
+
+[01/13/2023 14:19] ladboy233
+I am still kind of confused by the unit
+
+
+[01/13/2023 14:19] ladboy233
+https://reserve.org/en/protocol/monetary_units_baskets/
+
+{Embed}
+https://reserve.org/en/protocol/monetary_units_baskets/
+Reserve  | Monetary units + baskets
+
+
+[01/13/2023 14:19] ladboy233
+Which contract should we start? Which contract is the entry point 🙂
+
+
+[01/13/2023 14:19] ladboy233
+👀
+
+
+[01/13/2023 14:31] patrickalphac
+I started with the `issue` function, since that's where users will be `minting` themselves RTokens. It let me have a good understanding of how the whole protocol worked.
+
+{Reactions}
+🔥 (4) 
+
+[01/13/2023 14:32] ladboy233
+https://www.youtube.com/@PatrickAlphaC
+
+{Embed}
+https://www.youtube.com/@PatrickAlphaC
+Patrick Collins
+Linktree: https://linktr.ee/PatrickAlphaC
+
+Smart Contracts, Blockchain, Defi, Fintech, Solidity, Python, Golang, Javascript...
+
+We do a lot of stuff here!
+
+I’m a developer advocate on the Chainlink project, founder and CEO of my own blockchain infrastructure company, and lover of web3!
+Code4rena - ARCHIVE-Q1-2023 - reserve-jan06 [1060323395872505886].txt_Files/oYjghBMAgMjsPEzbCsAIsr16U74sJa_hEntQ6wz0nh-D564D
+
+
+[01/13/2023 14:33] ladboy233
+Are you the famous youtuber that runs this channel?
+
+
+[01/13/2023 14:33] 0xsorrynotsorry
+--Out of the contest context--
+i was checking the same thing 🙂
+
+{Reactions}
+😂 (2) 👍 
+
+[01/13/2023 14:34] patrickalphac
+Idk if "famous" is the right word 😅 But yeah that's me
+
+{Reactions}
+👍 (20) ☝️ (5) 🫡 (11) 🧐 (4) 4739_Skeletor (3) hi5 (7) ✅ (4) 😆 (5) 
+
+[01/13/2023 14:34] patrickalphac
+Always gotta keep learning 🙂
+
+{Reactions}
+C4Keycap (16) 
+
+[01/13/2023 14:35] patrickalphac
+Now I feel pressure lol
+
+{Reactions}
+empathy (8) 
+
+[01/13/2023 14:47] sathish9098kumar
+
+
+{Attachments}
+Code4rena - ARCHIVE-Q1-2023 - reserve-jan06 [1060323395872505886].txt_Files/image-3A187.png
+
+
+[01/13/2023 14:52] patrickalphac
+Run `yarn` first
+
+
+[01/13/2023 15:05] sathish9098kumar
+thank you patrick. you should post more about auditing process . This will be more helpful for more new auditors like me
+
+{Reactions}
+👍 (3) 
+
+[01/13/2023 15:07] sathish9098kumar
+now its working 👍
+
+{Reactions}
+👍 
+
+[01/14/2023 16:44] 0xdanielh
+I just wonder what have changed after the last audit @Akshat Mittal
+
+
+[01/14/2023 17:53] julianmrodri
+Overall concept and design are the same. Some refactors took place specially on the plugins, how we do pricing, etc.
+
+
+[01/14/2023 22:47] yixxas
+Hello, possible to get another invite link for this? Current link is expired
+
+
+[01/15/2023 10:48] 0xjuliaaa
+omg! I've been watching your video. It's honored to see you.
+
+{Reactions}
+👋 
+
+[01/15/2023 17:32] julianmrodri
+New invite link: https://discord.gg/FSSjt8mU
+
+
+[01/15/2023 17:59] hansfriese
+After I join the server, how to get the warden role?
+
+
+[01/16/2023 11:38] Franfran#5067
+The unit of `issuanceRate` in the `RToken` is 1 / block but what does it means ?
+
+
+[01/16/2023 11:38] Franfran#5067
+usually for a rate we would use token / block ?
+
+
+[01/16/2023 11:40] Franfran#5067
+oh is that %supply / block ?
+
+
+[01/16/2023 11:40] Franfran#5067
+yeah that makes sense
+
+
+[01/16/2023 13:43] jat4100
+looking at the automated findings, why is ERC20Upgradeable considered deprecated?
+
+
+[01/16/2023 13:49] thepicodes
+@Jat you can check the comments here: https://github.com/OpenZeppelin/openzeppelin-contracts/blob/785f65183c3ca6826cb0d4c160f65f4f92e33460/contracts/token/ERC20/utils/SafeERC20.sol#L37
+
+{Reactions}
+🙏🏼 
+
+[01/16/2023 13:55] jat4100
+Ah yes this is just the race condition in ERC20 standard
+
+
+[01/16/2023 15:53] julianmrodri
+It is encouraged to do `safeIncreaseAllowance` and `safeDecreaseAllowance` instead, the problem is that that way of handling allowances cannot be used with USDT, and we need to support this token.
+
+
+[01/16/2023 20:43] chaduke3730
+Any example of IAsset implementation? Thanks
+
+
+[01/17/2023 07:52] he1m
+@Julian | Reserve Dmed!
+
+
+[01/17/2023 12:25] julianmrodri
+the `rsrAsset` that you pass to the Deployer (check the test fixtures or the Facade contracts to see how its created). Also the COMP and AAVE tokens in our tests are  `Assets`
+
+
+[01/17/2023 12:28] julianmrodri
+Dont DM use the repo we posted in the Pinned messages at the top. There we create a private channel between Reserve and Warden
+
+
+[01/17/2023 12:29] julianmrodri
+New invite: https://discord.gg/FSSjt8mU
+
+
+[01/17/2023 14:00] pedr02b2
+good lord hahaa well i never ...its a real pleasure to see you here my friend.... hope your doing well
+
+
+[01/17/2023 14:16] chaduke3730
+@Julian | Reservethanks
+
+
+[01/19/2023 09:02] jm217
+
+
+{Attachments}
+Code4rena - ARCHIVE-Q1-2023 - reserve-jan06 [1060323395872505886].txt_Files/screenshot_47-7111A.png
+
+
+[01/19/2023 11:13] julianmrodri
+New invite link: https://discord.gg/MnShCCTX
+
+
+[01/19/2023 11:14] julianmrodri
+Not sure what happened. posted a new one just in case
+
+
+[01/19/2023 11:14] julianmrodri
+Probably expired?
+
+{Reactions}
+👍 
+
+[01/19/2023 14:07] praise95
+wow, sir your vids really impacted me with knowledge.  It's an honor meeting you here.
+
+{Reactions}
+🙌 
+
+[01/19/2023 20:53] acegawd
+I clicked and joined but I'm only seeing welcome and nothing else.
+
+
+[01/20/2023 08:49] jaraxxus775
+same. How do I start a chat with the sponser in the Reserve discord channel?
+
+
+[01/20/2023 10:57] cloudellie
+@0xmint @Jaraxxus775 I *think* the Reserve team is manually checking profiles & assigning roles in that server.
+
+{Reactions}
+👍 
+
+[01/20/2023 12:51] julianmrodri
+This should be done
+
+{Reactions}
+hi5 
+
+[01/20/2023 18:58] patrickalphac
+Wow this was a ton of fun and a lot more work than a normal audit
+
+
+[01/20/2023 18:58] patrickalphac
+2 weeks is tight!!
+
+{Reactions}
+👍 (3) 
+
+[01/20/2023 20:02] C4
+**🚨 CONTEST ALERT**
+
+@🐺wardens  The **Reserve** contest is now closed! Huge thanks to everyone who participated 🔍, whether you submitted a finding or not.
+
+What's next: The sponsor team and judge will review the findings over the next couple of weeks. Keep an eye on #📢announcements for regular updates on how the contest is progressing through awarding 🤑🏆, judging 🧑‍⚖️ and reporting 📜. Feel free to ping a gardener if you have questions along the way!
+
+{Reactions}
+🔥 (8) 
+
+[01/20/2023 20:06] julianmrodri
+Thanks everyone who participated!
+
+
+[01/20/2023 20:07] julianmrodri
+Looking forward as a team to go over the findings
+
+{Reactions}
+👍 (16) 
+
+[01/25/2023 18:15] mattimost
+Thank you all who participated, we're working through reviewing the report now. Shoutout to C4 team for a quick turnaround on our report
+
+Also, love this method of reviewing issues vs "getting pdf with everything"
+https://twitter.com/mattimost/status/1618305454844833793
+
+{Embed}
+Thomas Mattimore (tmattimore.eth) (@mattimost)
+https://twitter.com/mattimost/status/1618305454844833793
+First impressions: @code4rena has the best "issue review and response" process/interface of any auditor we're worked with by far 👌
+Twitter
+
+{Reactions}
+🎉 (13) thankyou (3) cyberheart (3) chefskiss (2) cheers_badger (2) praisethesun (2) 
+
+[02/03/2023 23:13] abuzay#1524
+Any update ?
+
+
+[02/04/2023 02:24] mattimost
+judging still in progress!
+
+
+[02/08/2023 13:15] ladboy233
+This is a.. very difficult contest....
+
+
+[02/08/2023 19:40] praise95
+Hello, how far have they gone with the judging process?
+
+
+[02/10/2023 04:56] ahmet5611
+https://github.com/code-423n4/code423n4.com/commit/e3bded78e07837252df2901f0fdd136064e46343
+
+{Embed}
+https://github.com/code-423n4/code423n4.com/commit/e3bded78e07837252df2901f0fdd136064e46343
+Add 203 to leaderboard · code-423n4/code423n4.com@e3bded7
+Code4rena - ARCHIVE-Q1-2023 - reserve-jan06 [1060323395872505886].txt_Files/e3bded78e07837252df2901f0fdd136064e46343-9A907
+
+{Reactions}
+👍 (2) 
+
+[02/10/2023 07:21] un_for_given
+Strange 
+https://github.com/reserve-protocol/protocol/issues?q=is%3Aissue
+
+{Embed}
+https://github.com/reserve-protocol/protocol/issues?q=is%3Aissue
+Issues · reserve-protocol/protocol
+Contribute to reserve-protocol/protocol development by creating an account on GitHub.
+Code4rena - ARCHIVE-Q1-2023 - reserve-jan06 [1060323395872505886].txt_Files/protocol-A5869
+
+
+[02/10/2023 10:24] un_for_given
+one line bash command to get the results from PR (draft result, not final before merge):
+```bash
+repo=findings-feb10 ; contest=203; top=15 ; curl "https://raw.githubusercontent.com/code-423n4/code423n4.com/$repo/_data/findings/findings.csv" -s | grep "^$contest," | awk -F"," '{ print "@"$2" "$11}' | perl -nle '($k, $v) = split; $s{$k} += $v; END {$, = " "; foreach $k (sort keys %s) {print $s{$k},">>",$k}}' | sort -nr | head -n $top
+```
+
+26021.41 >> HollaDieWaldfee
+17645.8 >> 0xA5DF
+14727.23 >> 0x52
+11816.64 >> unforgiven
+9913.42 >> Cyfrin
+8940.36 >> Soosh
+5335.79 >> severity
+4676.19 >> wait
+4490.61 >> AkshaySrivastav
+4418.17 >> fs0c
+4418.17 >> csanuragjain
+4418.17 >> Franfran
+4418.17 >> 0xTaylor
+3558.64 >> __141345__
+2311.19 >> IllIllI
+
+{Reactions}
+🔥 (13) 
+
+[02/10/2023 11:40] cloudellie
+Thank you for noting that it's not final 🙂
+
+{Reactions}
+😋 
+
+[02/10/2023 11:40] cloudellie
+My endless complaints about this have been heard 🎉 😂
+
+{Reactions}
+😄 (5) 🎇 
+
+[02/10/2023 13:25] chaduke3730
+It is a good suspense
+
+{Reactions}
+😂 
+
+[02/10/2023 13:25] chaduke3730
+😅
+
+
+[02/10/2023 16:42] akshaysrivastav
+👀
+
+
+[02/10/2023 17:53] praise95
+👀
+
+
+[02/10/2023 18:28] itsmetechjay
+:C4Keycap:  💸 🎉 Awards for **Reserve**:
+
+$26,021.39 USDC » @HollaDieWaldfee 
+$17,645.79 USDC » @0xA5DF 
+$14,727.23 USDC » @0x52 
+$11,816.63 USDC » @unforgiven 
+$9,913.42 USDC » Cyfrin (@PatrickAlphaC, @giovannidisiena)
+$8,940.35 USDC » @Soosh 
+$5,335.79 USDC » severity (@medium-or-low, @critical-or-high)
+$4,676.19 USDC » @wait 
+$4,490.61 USDC » @AkshaySrivastav 
+$4,418.17 USDC » @fs0c 
+$4,418.17 USDC » @!0xTaylor 
+$4,418.17 USDC » @csanuragjain 
+$4,418.17 USDC » @Franfran 
+$3,558.64 USDC » @__141345__ 
+$2,311.19 USDC » @IllIllI 
+$2,197.54 USDC » @Alex The Entreprenerd 
+$2,180.28 USDC » @hihen 
+$1,994.70 USDC » @chaduke 
+$1,306.03 USDC » @Kiki 
+$1,192.91 USDC » @0xdeadbeef0x 
+$1,126.62 USDC » @descharre 
+$1,126.62 USDC » @0xSmartContract 
+$1,077.08 USDC » @RaymondFam 
+$1,005.04 USDC » @Rolezn 
+$1,005.04 USDC » @c3phas 
+$1,004.64 USDC » @luxartvinsec 
+$1,004.64 USDC » @brgltd 
+$917.62 USDC » @ustas 
+$335.43 USDC » @immeas 
+$258.02 USDC » @rvierdiiev 
+$258.02 USDC » @JTJabba 
+$194.03 USDC » @Bnke 
+$194.03 USDC » @Sathish9098 
+$194.03 USDC » @carlitox477 
+$194.03 USDC » @shark 
+$194.03 USDC » @MogiBlack
+$194.03 USDC » @delfin454000 
+$194.03 USDC » @Breeje 
+$194.03 USDC » @code-cipher 
+$121.59 USDC » @Ruhum
+$121.59 USDC » @btk  
+$121.59 USDC » @iceBear 
+$121.59 USDC » @MyFDsYours
+$121.59 USDC » @Rotcivegaf 
+$121.59 USDC » @0xladboy | Sparkware 
+$121.59 USDC » @tnevler 
+$121.59 USDC » @chrisdior4 
+$121.59 USDC » @tsar 
+$121.59 USDC » @peanuts 
+$121.59 USDC » @pedr02b2  
+$121.59 USDC » @cryptonue 
+$121.59 USDC » @lukris02 
+$121.59 USDC » @0xNazgul 
+$121.59 USDC » @yongskiws 
+$121.59 USDC » @0xAgro 
+$121.59 USDC » @Udsen 
+$121.59 USDC » @joestakey 
+$72.44 USDC » @0xhacksmithh 
+$72.44 USDC » @arialblack14 
+$72.44 USDC » @thinklab 
+$72.44 USDC » @saneryee 
+$72.44 USDC » @Madalad 
+$72.44 USDC » @amshirif 
+$72.44 USDC » @bauer6009 
+$72.44 USDC » @Rageur 
+$72.44 USDC » @ICP 
+$72.44 USDC » @RHaO-sec 
+$72.44 USDC » @ReyAdmirado 
+$72.44 USDC » @nadin 
+$72.44 USDC » @Budaghyan 
+$72.44 USDC » @Noam Yakov 
+$72.44 USDC » @SAAJ 
+$72.44 USDC » @Awesome 
+
+🏁 Findings summary
+---------------------------
+High risk findings: 3 total, 2 unique
+Med risk findings: 40 total, 25 unique
+Gas reports: 35 
+QA reports: 41 
+
+Awards will be distributed on Polygon within the next week. Congratulations, everyone! 💸 💸 💸
+
+*If you participated in this contest and don’t see your name on this list, please wait until the report is published and the findings repo is made public to check on your submissions.*
+
+{Reactions}
+hi5 (12) Clap (6) chad_citadel (3) 0xTaylor (2) 
+
+[02/10/2023 18:34] ladboy233
+😢🥲🥹😅😱😆👍👀
+
+
+[02/10/2023 18:58] .qeew
+Steady lads, you appear in every contest
+
+{Reactions}
+🥲 
+
+[02/10/2023 19:01] chaduke3730
+congrats to all!
+
+
+[02/10/2023 19:24] prcolaco
+congrats guys! awesome work! 👍
+
+{Reactions}
+praisethesun (4) 
+
+[02/10/2023 19:33] fs0c
+Nice ! My first 4 digit bounty. Contracts to all !!
+
+{Reactions}
+Clap (10) 🎉 (2) 
+
+[02/10/2023 19:43] patrickalphac
+Nice job to everyone who participated! Reserve is an awesome DeFi primitive product with an exciting approach to stablecoins, glad so many showed up to give them an audit!
+
+{Reactions}
+🫡 (12) 🙏 (3) 
+
+[02/10/2023 19:54] ladboy233
+Can I please DM you?
+
+
+[02/10/2023 21:37] akshaysrivastav
+🎉
+
+
+[02/10/2023 21:45] ustas.eth
+My first vulnerability and it is a medium one! Nice :4739_Skeletor:
+
+{Reactions}
+🎉 (3) 
+
+[02/10/2023 22:01] Franfran#5067
+smart congrats ! 👏
+
+{Reactions}
+thankyou chefskiss 
+
+[02/10/2023 23:19] mattimost
+congrats to all and thanks to all for participating! we learned a lot 🎉
+
+{Reactions}
+🎉 (5) 
+
+[02/11/2023 04:45] kartika___
+congrats to all awesome people...😀
+
+
+[02/11/2023 04:46] kartika___
+@HollaDieWaldfee Congratulations on discovering the vulnerability and coming out on top in the competition!
+
+
+[02/11/2023 05:33] praise95
+congrats everyone 👏
+
+
+[02/11/2023 06:36] matin6517
+I had some questions about Cyfrin. Can I dm you please?
+
+
+[02/12/2023 10:52] 0xsurena
+hi guys, simple question and help me to understand, please
+
+the reserve is using a governance contract and new governance proposal can be prevented by anyone based on below :
+
+proposalId get generated from the  proposal data (_targets, _values, _calldatas, descriptionHash).
+
+so anyone can prevent others from creating governance proposals by front-running the create proposal transaction with the same data,
+
+this is true?
+
+
+[02/12/2023 10:52] 0xsurena
+https://github.com/OpenZeppelin/openzeppelin-contracts/blob/c9bc4f82030d6c9db2149c16636a35178a858a75/contracts/governance/Governor.sol#L256
+
+{Embed}
+https://github.com/OpenZeppelin/openzeppelin-contracts/blob/c9bc4f82030d6c9db2149c16636a35178a858a75/contracts/governance/Governor.sol
+openzeppelin-contracts/Governor.sol at c9bc4f82030d6c9db2149c16636a...
+OpenZeppelin Contracts is a library for secure smart contract development. - openzeppelin-contracts/Governor.sol at c9bc4f82030d6c9db2149c16636a35178a858a75 · OpenZeppelin/openzeppelin-contracts
+Code4rena - ARCHIVE-Q1-2023 - reserve-jan06 [1060323395872505886].txt_Files/openzeppelin-contracts-9F647
+
+
+[02/12/2023 10:53] 0xsurena
+https://github.com/reserve-protocol/protocol/blob/df7ecadc2bae74244ace5e8b39e94bc992903158/contracts/plugins/governance/Governance.sol#L85
+
+{Embed}
+https://github.com/reserve-protocol/protocol/blob/df7ecadc2bae74244ace5e8b39e94bc992903158/contracts/plugins/governance/Governance.sol
+protocol/Governance.sol at df7ecadc2bae74244ace5e8b39e94bc992903158...
+Contribute to reserve-protocol/protocol development by creating an account on GitHub.
+Code4rena - ARCHIVE-Q1-2023 - reserve-jan06 [1060323395872505886].txt_Files/protocol-A5869
+
+
+[02/12/2023 13:46] 0xsurena
+any answer please ?
+
+
+[02/12/2023 14:34] budaghyan
+My first contest, and I got a reward))
+
+{Reactions}
+hi5 (3) 
+
+[02/12/2023 16:16] chaduke3730
+So happy for you
+
+
+[02/12/2023 16:16] chaduke3730
+Congrats!
+
+
+[02/12/2023 16:17] chaduke3730
+My first time was 0.02!
+
+
+[02/12/2023 16:37] 0xhacksmithh
+Congo.....
+
+{Reactions}
+👍 
+
+[02/12/2023 16:54] 0xsurena
+🙄
+
+
+[02/12/2023 16:55] 0xsurena
+@Trust @Pierrick @Alex The Entreprenerd @0xean
+
+{Reactions}
+PU_pepeThinkBaguette (4) thisisfine 
+
+[02/12/2023 17:23] 0xsurena
+related and same approved report, https://github.com/code-423n4/2022-09-nouns-builder-findings/issues/182 , maybe i am making mistake, so please help to understand it 🙂
+
+{Embed}
+https://github.com/code-423n4/2022-09-nouns-builder-findings/issues/182
+Creating a new governance proposal can be prevented by anyone · Iss...
+Lines of code https://github.com/code-423n4/2022-09-nouns-builder/blob/7e9fddbbacdd7d7812e912a369cfd862ee67dc03/src/governance/governor/Governor.sol#L151 https://github.com/code-423n4/2022-09-nouns...
+Code4rena - ARCHIVE-Q1-2023 - reserve-jan06 [1060323395872505886].txt_Files/182-3F8A6
+
+
+[02/13/2023 14:18] budaghyan
+Thnx))
+
+
+[02/13/2023 20:12] patrickalphac
+Got your email!
+
+
+[02/13/2023 20:22] matin6517
+Thank you for your consideration🙏
+
+
+[02/15/2023 13:40] 0xean
+@0xSurena - spamming judges isn't going to help here.
+
+What is your specific question?
+
+{Reactions}
+🫡 
+
+[02/15/2023 13:42] 0xsurena
+Ok, thanks 🙂  I just wanted to make sure if I made a mistake or not
+
+
+[02/15/2023 13:42] 0xsurena
+Because the same problem was confirmed by the judges in another project, but not confirmed here
+
+
+[02/15/2023 13:43] 0xsurena
+It's not about money or finances 🙏
+
+
+[02/15/2023 13:43] 0xsurena
+🙏
+
+
+[02/15/2023 13:43] 0xean
+I cannot comment on sherlock, their judging or or their severity levels. So if you are asking for a comparison between the two, I have no information for you
+
+
+[02/15/2023 13:44] 0xsurena
+https://github.com/code-423n4/2022-09-nouns-builder-findings/issues/182
+
+{Embed}
+https://github.com/code-423n4/2022-09-nouns-builder-findings/issues/182
+Creating a new governance proposal can be prevented by anyone · Iss...
+Lines of code https://github.com/code-423n4/2022-09-nouns-builder/blob/7e9fddbbacdd7d7812e912a369cfd862ee67dc03/src/governance/governor/Governor.sol#L151 https://github.com/code-423n4/2022-09-nouns...
+Code4rena - ARCHIVE-Q1-2023 - reserve-jan06 [1060323395872505886].txt_Files/182-3F8A6
+
+
+[02/15/2023 13:44] 0xsurena
+this is not from sherlock, this is from Code4rena
+
+
+[02/15/2023 13:45] 0xean
+okay, and what issue are you asking about specific to reserve?
+
+
+[02/15/2023 13:45] 0xsurena
+this is my report, I want to understand I am making mistake or no
+
+
+[02/15/2023 13:45] 0xsurena
+# Lines of code
+
+https://github.com/OpenZeppelin/openzeppelin-contracts/blob/c9bc4f82030d6c9db2149c16636a35178a858a75/contracts/governance/Governor.sol#L263
+
+
+# Vulnerability details
+
+When creating a new governance proposal, the proposalId is generated by hashing the proposal data.
+uint256 proposalId = hashProposal(targets, values, calldatas, keccak256(bytes(description)));
+
+To prevent duplicated proposals, the current Governor implementation checks if the proposalId exists already. If it exists, the call will revert with the "Governor: proposal already exists" error.
+
+## Impact
+Anyone can prevent others from creating governance proposals by front-running the create proposal transaction with the same data, followed by an immediate call to the Governor.cancel function.
+
+This will prevent creating a proposal with the same proposal data. A proposal creator would have to slightly change the proposal to try to create it again (however, it can be prevented again due to the aforementioned issue)
+
+## Proof of Concept
+https://github.com/OpenZeppelin/openzeppelin-contracts/blob/c9bc4f82030d6c9db2149c16636a35178a858a75/contracts/governance/Governor.sol#L245
+https://github.com/OpenZeppelin/openzeppelin-contracts/blob/c9bc4f82030d6c9db2149c16636a35178a858a75/contracts/governance/Governor.sol#L372
+
+https://github.com/code-423n4/2022-09-nouns-builder-findings/issues/182
+
+## Tools Used
+Manual
+
+## Recommended Mitigation Steps
+Consider adding a per-account nonce storage variable (e.g. mapping(address => uint256) internal proposalCreatorNonces; to the Governor contract and include the proposalCreatorNonces[msg.sender]++ nonce within the computed proposal id.
+
+{Embed}
+https://github.com/code-423n4/2022-09-nouns-builder-findings/issues/182
+Creating a new governance proposal can be prevented by anyone · Iss...
+Lines of code https://github.com/code-423n4/2022-09-nouns-builder/blob/7e9fddbbacdd7d7812e912a369cfd862ee67dc03/src/governance/governor/Governor.sol#L151 https://github.com/code-423n4/2022-09-nouns...
+Code4rena - ARCHIVE-Q1-2023 - reserve-jan06 [1060323395872505886].txt_Files/182-3F8A6
+
+{Embed}
+https://github.com/OpenZeppelin/openzeppelin-contracts/blob/c9bc4f82030d6c9db2149c16636a35178a858a75/contracts/governance/Governor.sol
+openzeppelin-contracts/Governor.sol at c9bc4f82030d6c9db2149c16636a...
+OpenZeppelin Contracts is a library for secure smart contract development. - openzeppelin-contracts/Governor.sol at c9bc4f82030d6c9db2149c16636a35178a858a75 · OpenZeppelin/openzeppelin-contracts
+Code4rena - ARCHIVE-Q1-2023 - reserve-jan06 [1060323395872505886].txt_Files/openzeppelin-contracts-55ABD
+
+
+[02/15/2023 13:46] 0xean
+what is the issue number please?
+
+
+[02/15/2023 13:48] 0xsurena
+Excuse me, what do you mean by issue number ?
+
+
+[02/15/2023 13:48] 0xean
+the github issue number for your report
+
+
+[02/15/2023 13:50] codingnamekiki
+found it @0xean, it's #169
+
+{Reactions}
+👍 
+
+[02/15/2023 13:51] 0xean
+https://github.com/code-423n4/2023-01-reserve-findings/issues/169 <- @0xSurena have you read this and if so what information are you asking for in addition to that?
+
+Again spamming judges is  a _very_ bad way to learn here.
+
+{Reactions}
+🫡 
+
+[02/15/2023 13:52] 0xsurena
+I did not mean to spam
+
+
+[02/15/2023 13:53] 0xean
+ty
+
+{Reactions}
+pepemexican 
+
+[02/15/2023 13:54] 0xsurena
+i get 404 for this link
+
+
+[02/15/2023 13:54] codingnamekiki
+no backstage role
+
+{Reactions}
+👍 (2) 
+
+[02/15/2023 13:54] 0xean
+ahh.  Okay, you aren't backstage.  You need to wait until the contest is public then
+
+{Reactions}
+🫡 
+
+[02/15/2023 13:57] 0xsurena
+anyway , thanks for answer 🙏 🙂
+
+
+[02/17/2023 07:22] 0xtaylor
+How long until the report is ready?
+
+
+[02/18/2023 22:43] rageur_
+Hi, I got my first reward on this contest. How long is it to receive the reward and in which currency ? Thanks
+
+
+[02/18/2023 22:51] 0xsmartcontract
+https://discord.com/channels/810916927919620096/810929015509483554/1075190857671655505
+
+
+[02/22/2023 19:46] larrythecumber
+If anyone here is attending ETH Denver, we'd love for you to apply to our hackathon for $70k in prizes 🙂 https://tally.so/r/wbq54E
+
+{Embed}
+Tally Forms
+https://tally.so/r/wbq54E
+Reserve Protocol - $70k Hackathon @ ETHDenver
+Code4rena - ARCHIVE-Q1-2023 - reserve-jan06 [1060323395872505886].txt_Files/Frame-2955-A7B5E.png
+
+{Reactions}
+chefskiss (3) 👀 (3) 
+
+==============================================================
+Exported 182 message(s)
+==============================================================
